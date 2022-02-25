@@ -3,7 +3,6 @@ You have found the legendary Gnomish Dice Cup!*
 
 
 
-
 # gnomish-dice-cup
 A Python-based dice roller for Dungeons and Dragons or other tabletop RPGs that uses natural language input to generate a complete roll with modifiers, weapon/spell selection, and advantage/disadvantage.
 
