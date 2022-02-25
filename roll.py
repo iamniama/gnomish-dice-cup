@@ -3,6 +3,7 @@ import random
 
 
 class Roll:
+
     def __init__(self):
         self.dice_rex = re.compile(r'''
             (?P<base_roll>(?P<num_dice>[0-9]*)d(?P<sides>[0-9]{,3}))  # get the base roll, dice, and sides
@@ -10,6 +11,11 @@ class Roll:
         self.mod_rex = re.compile(r'[+-][0-9]+')
 
     def parse_command(self, command_str):
+        """
+        Breaks the command input into its components and provides a base structure for the roll
+        :param command_str: the command string input by the user
+        :return: output, a dict with all relevant info about the dice before the roll
+        """
         dice_info = self.dice_rex.search(command_str)
         modifiers = [int(x) for x in list(self.mod_rex.findall(command_str))]
         output = {
@@ -32,9 +38,19 @@ class Roll:
         return output
 
     def num_gen(self, sides):
+        """
+        Random number generation for dice rolling
+        :param sides: the number of sides (the upper bound for random int)
+        :return: a random choice selected from a list of 25 random integers within range(1,sides)
+        """
         return random.choice([random.randint(1,sides) for x in range(25)])
 
     def roll_dice(self, command_str):
+        """
+        The main method of the Roll class, roll_dice takes the user's commmand, passes it to the command parser, and returns dice roll data
+        :param command_str: the user input
+        :return: dict with output of parse_command along with the actual results of the roll
+        """
         cmd_data = self.parse_command(command_str)
         cmd_data['dice_info']['dice_pool_primary'] = [self.num_gen(cmd_data['dice_info']['sides']) for x in range(cmd_data['dice_info']['dice'])]
         cmd_data['dice_info']['dice_pool_secondary'] = [self.num_gen(cmd_data['dice_info']['sides']) for x in
