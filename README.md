@@ -1,3 +1,9 @@
+*Inside the chest, you find a leather and brass cup such as one might use for rolling dice.  Closer inspection reveals a humming sound and the click of tiny gears coming from it, suggesting a gnomish design.  You lift the cup out of the chest, and it makes a churning vibration in your hand, as though an unknown number of tiny objects are rattling and shaking inside.  
+You have found the legendary Gnomish Dice Cup!*
+
+
+
+
 # gnomish-dice-cup
 A Python-based dice roller for Dungeons and Dragons or other tabletop RPGs that uses natural language input to generate a complete roll with modifiers, weapon/spell selection, and advantage/disadvantage.
 
@@ -5,8 +11,6 @@ The initial phase of development intends to produce a natural language dice roll
 This will allow users to issue commands such as *swing*, *cast magic missile*, *shoot*, *reflex save*, etc, and get appropriate rolls without having to specify the dice info.  The base roll commands will also still be available, for maximum flexibility in game sessions.
 
 ## Backstory
-*Inside the chest, you find a leather and brass cup such as one might use for rolling dice.  Closer inspection reveals a humming sound and the click of tiny gears coming from it, suggesting a gnomish design.  You lift the cup out of the chest, and it makes a churning vibration in your hand, as though an unknown number of tiny objects are rattling and shaking inside.  Cant it be?  The legendary Gnomish Dice Cup?*
-
 While working on various tutorials and drills to hone my Python and development skills, I found myself not really getting into the projects and wanting to do something different.
 During this time, I also discovered D&D gameplay videos by Critical Role, Viva la Dirt League, and others, and spent a lot of my spare time watching and listening to D&D games using the 5th Edition rules, which were very different from 2E, the last rules that I played under.
 
