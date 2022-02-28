@@ -1,40 +1,47 @@
 import re
 import random
+import pprint
 
 
 class Roll:
 
     def __init__(self):
+        # TODO: Update mod_rex to include an identifier, such as +2 (weapon) +1 (stat) -2 (partial cover)
         self.dice_rex = re.compile(r'''
             (?P<base_roll>(?P<num_dice>[0-9]*)d(?P<sides>[0-9]{,3}))  # get the base roll, dice, and sides
         ''', re.X)
         self.mod_rex = re.compile(r'[+-][0-9]+')
 
     def parse_command(self, command_str):
+        # TODO: need to differentiate command formats, so that a simple command like 1d20 or just an int can just get passed on to num_gen()
+
         """
         Breaks the command input into its components and provides a base structure for the roll
         :param command_str: the command string input by the user
         :return: output, a dict with all relevant info about the dice before the roll
         """
-        dice_info = self.dice_rex.search(command_str)
-        modifiers = [int(x) for x in list(self.mod_rex.findall(command_str))]
-        output = {
-            'error': False,
-            'command': command_str,
-            'dice_info': {
-                'dice': 1 if not dice_info['num_dice'].isdigit() else int(dice_info['num_dice']),
-                'sides': int(dice_info['sides']),
-                'modifiers': modifiers,
-                'mod_sum': sum(modifiers) if len(modifiers) > 0 else 0,
-                'advantage': 'with advantage' in command_str,
-                'disadvantage': 'with disadvantage' in command_str,
-                'roll_result': 0,
-                'primary_dice': 0,
-                'secondary_dice': 0,
-                'dice_pool_primary': [],
-                'dice_pool_secondary': [],
+        try:
+            dice_info = self.dice_rex.search(command_str)
+            modifiers = [int(x) for x in list(self.mod_rex.findall(command_str))]
+            output = {
+                'error': False,
+                'command': command_str,
+                'dice_info': {
+                    'dice': 1 if not dice_info['num_dice'].isdigit() else int(dice_info['num_dice']),
+                    'sides': int(dice_info['sides']),
+                    'modifiers': modifiers,
+                    'mod_sum': sum(modifiers) if len(modifiers) > 0 else 0,
+                    'advantage': 'with advantage' in command_str,
+                    'disadvantage': 'with disadvantage' in command_str,
+                    'roll_result': 0,
+                    'primary_dice': 0,
+                    'secondary_dice': 0,
+                    'dice_pool_primary': [],
+                    'dice_pool_secondary': [],
                 },
             }
+        except TypeError:
+            return {'error': True}
         return output
 
     def num_gen(self, sides):
@@ -66,3 +73,11 @@ class Roll:
         return cmd_data
 
 
+if __name__ == "__main__":
+    cup = Roll()
+    pp = pprint.PrettyPrinter(indent=4)
+    roll_info = cup.roll_dice(input())
+    pp.pprint(roll_info)
+    if not roll_info['error']:
+        pp.pprint(roll_info)
+        print(f"Your total roll was: {roll_info['dice_info']['roll_result']}")
