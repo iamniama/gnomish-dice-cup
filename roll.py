@@ -44,7 +44,8 @@ class Roll:
             return {'error': True}
         return output
 
-    def num_gen(self, sides):
+    @staticmethod
+    def num_gen(sides):
         """
         Random number generation for dice rolling
         :param sides: the number of sides (the upper bound for random int)
